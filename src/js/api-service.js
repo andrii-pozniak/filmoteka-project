@@ -43,7 +43,6 @@ export default class ApiService {
     spinner.setAttribute('hidden', '');
     const allFilm = response.data;
 
-    // console.log('all', allFilm);
     return allFilm;
   }
 

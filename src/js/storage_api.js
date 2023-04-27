@@ -1,4 +1,3 @@
-// сохраняем значение инфы по ключу
 function saveInfo(key, value) {
   try {
     let serializedState = JSON.stringify(value);
@@ -8,7 +7,6 @@ function saveInfo(key, value) {
   }
 }
 
-// достаем инфу из стореджа по ключу
 function getInfo(key) {
   try {
     let deserializedState = localStorage.getItem(key);
@@ -20,7 +18,6 @@ function getInfo(key) {
   }
 }
 
-// удаляем инфу в сторедже по ключу (хз - нужна ли она будет, но добавил)
 function removeInfo(key) {
   try {
     localStorage.removeItem(key);

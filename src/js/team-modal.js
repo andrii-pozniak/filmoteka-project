@@ -9,7 +9,7 @@ import edUrl from '../images/ed.jpg';
 import oleksandrUrl from '../images/oleksandr.jpg';
 import olegUrl from '../images/oleg.jpg';
 import andriiUrl from '../images/andrii.jpg';
-import githubUrl from '../images/sprite.svg'
+import githubUrl from '../images/sprite.svg';
 
 const markup = `<div class="team-wrapper">
     

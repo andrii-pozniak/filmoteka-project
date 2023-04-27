@@ -1,7 +1,3 @@
-// по нажатию кнопки WATCHED в значение keyOfLocalStorage вносим ключ локал сторадж просмотренных и добавляем/убираем класс .is-active
-// по нажатию кнопки QUEUE в значение keyOfLocalStorage вносим ключ локал сторадж очереди и добавляем/убираем класс .is-active
-// по нажатию на карточку открываем модальное окно
-import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
@@ -9,10 +5,7 @@ import { fetchFromGallery } from './fetch-render_modal';
 import { renderModal, backdrop } from './renderModal';
 const apiService = new ApiService();
 
-//localStorageChecker
-
 let arrayToRender = [];
-// функція викликається при кліку, звертається до локал стораж, забирає масив і по ньому рендерить в розмітку
 function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
   console.log(arrayToRender);
@@ -64,10 +57,6 @@ const refs = {
   contentEl: document.querySelector('.content'),
 };
 
-// console.log(refs.queueBtn);
-// console.log(refs.watchedBtn);
-// console.log(refs.libraryEl);
-
 const onClickWatched = () => {
   refs.queueBtn.classList.remove('btn_is-active');
   refs.watchedBtn.classList.add('btn_is-active');
@@ -93,9 +82,6 @@ let queueData = [];
 let watchedData = [];
 queueData = getInfo('queue');
 watchedData = getInfo('watched');
-// console.log(queueData.length);
-// console.log(watchedData.length);
-// if (queueData.length < 1 || watchedData < 1) {return};
 
 if (refs.queueBtn) {
   if (!queueData && !watchedData) {
@@ -110,9 +96,5 @@ if (refs.queueBtn) {
     return;
   }
 }
-
-// let watchedData = getInfo('watched');
-// console.log("LENGTH", localData.length);
-// if (watchedData && watchedData.length > 0 ) {onClickWatched()};
 
 export { onClickQueue, onClickWatched };

@@ -53,14 +53,11 @@ export function fetchFromGallery(args, key) {
       }
       watched.addEventListener('click', () => {
         let watchedMovies = getInfo('watched') || [];
-        // console.log('from storage:', watchedMovies);
 
         const isAlreadyThere = watchedMovies.find(
           movie => movie.id === element.id
         );
-        // console.log({ isAlreadyThere });
         if (isAlreadyThere) {
-          // console.log('removing from watched');
           watched.textContent = 'Add to watched';
           watchedMovies = watchedMovies.filter(
             movie => movie.id !== element.id
@@ -68,7 +65,6 @@ export function fetchFromGallery(args, key) {
           watched.textContent = 'Add to Watched';
         } else {
           watched.textContent = 'Remove from watched';
-          // console.log('adding movie to watched');
           watchedMovies.push(element);
           watched.textContent = 'Remove from Watched';
         }

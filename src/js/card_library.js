@@ -27,5 +27,3 @@ export default function onCardLib({
     </div>
 </div>`;
 }
-
-/* <p class="card_rating">  ${ vote_average.toFixed(1)}</p> */

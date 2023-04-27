@@ -1,12 +1,12 @@
 import ApiService from './api-service';
 import addArticleImage from './fetchImages';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
-import { createPagination, createPaginationForSearch } from './pagination'; // добавил для пагинации
+import { createPagination, createPaginationForSearch } from './pagination';
 import { fetchFromGallery } from './fetch-render_modal';
 import { backdrop } from './renderModal';
 
 const FUND_NAME = 'genre_card';
-let previousSearch = ''; // от Василия костыль
+let previousSearch = '';
 
 const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
@@ -17,8 +17,6 @@ const apiService = new ApiService();
 if (searchFormRef) {
   searchFormRef.addEventListener('submit', onFormSubmit);
 }
-
-// console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
@@ -31,8 +29,6 @@ function onFormSubmit(e) {
       const galContainer = document.querySelector('.gallery');
 
       if (data.results.length === 0) {
-        // input.value = '';
-
         document
           .querySelector('.error-notification')
           .insertAdjacentHTML(
@@ -44,13 +40,11 @@ function onFormSubmit(e) {
           genres = data.genres;
           localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
           apiService.fetchImage().then(data => {
-            // console.log('YES', data.total_results);
-            createPagination(data.total_results); // добавил для пагинации
+            createPagination(data.total_results);
 
             addArticleImage(data);
-            saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+            saveInfo(data.page, data.results);
           });
-          //  console.log('ok', data.genres);
         });
 
         apiService.fetchImage().then(data => {
@@ -58,20 +52,17 @@ function onFormSubmit(e) {
             if (document.querySelector(`.error-notification`)) {
               document.querySelector('.error-notification').innerHTML = '';
               input.value = '';
-              // addArticleImage(data);
               saveInfo(data.page, data.results);
-              // let genres = [];
               apiService.fetchImage().then(data => {
-                createPagination(data.total_results); // добавил для пагинации
+                createPagination(data.total_results);
 
-                saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+                saveInfo(data.page, data.results);
               });
               input.value = '';
               const GENRE_NAME = 'genre_card';
               let genres = [];
 
               const genreName = localStorage.getItem(GENRE_NAME);
-              // console.log('genre', genreName)
               genres = JSON.parse(genreName);
               console.log(genres);
               document.querySelector(`.gallery`).innerHTML = '';
@@ -80,22 +71,17 @@ function onFormSubmit(e) {
           }, 2000);
         });
 
-        //  console.log(cartError)
         return;
       } else {
-        // console.log(data.results);
         saveInfo('page', data.results);
 
-        // console.log(galContainer);
         galContainer.addEventListener('click', showCard);
       }
 
-      // console.log('ok', data.results.length);
       cleanView();
       addArticleImage(data);
 
       createPaginationForSearch(data.total_results);
-      // console.log(' !!!!!!!!! ', data); // проверка
     });
   }
 }
